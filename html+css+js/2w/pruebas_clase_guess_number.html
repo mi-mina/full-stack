@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guessing game</title>
+  <script type="text/javascript">
+    var target, guess_input, guesses;
+    guesses = 0;
+
+    function ask_number () {
+      target = Math.floor((Math.random()*100)+1);
+      guess_input = parseInt(prompt("I am thinking of a number\n\n" +
+      "Please enter a number in the range 1 to 100"));
+      if (isNaN(guess_input)){
+        alert("Enter a number!");
+        ask_number();
+      }else if(guess_input < 1 || guess_input > 100){
+        alert("Wrong range!");
+        ask_number();
+      }else if(guess_input > target){
+        alert("Too high!");
+        guesses++;
+        ask_number();
+      }else if(guess_input < target){
+        alert("Too low!");
+        guesses++;
+        ask_number();
+      }else{
+        alert("You got it! The number was " + guess_input + "\n\n" +
+        "It took you " + guesses + " guesses to get the number!");
+      }
+    }
+
+  </script>
+</head>
+<body onload="ask_number();">
+
+</body>
+</html>

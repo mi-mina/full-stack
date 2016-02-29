@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+    var user_preferences = prompt("¿A donde quieres ir?");
+
+    switch (user_preferences){
+      case "Japan":
+      // Al final de cada case hay que poner siempre dos puntos, aunque luego no
+      // haya nada. Si no hay un break, lo que ocurre es que pasa a la siguiente
+      // línea.
+      case "Nepal":
+      case "China":
+        alert("¡Vamos para oriente!");
+        break;
+      case "EEUU":
+      case "Canada":
+        alert("¡Vamos para occidente!");
+        break;
+      default: alert("Nos quedamos en casa");}
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

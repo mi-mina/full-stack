@@ -16,6 +16,9 @@
       text-align: right;
       vertical-align: top;
     }
+    label:hover, input:hover, select:hover {
+      font-size:20px;
+    }
     input[type=radio] + label, input[type=checkbox] + label{
       width: auto;
     }
@@ -42,28 +45,27 @@
 </head>
 <body>
   <h1>Please Enter Your Details For Our Dating Website!</h1>
-  <form action="https://ihome.ust.hk/~rossiter/cgi-bin/show_everything.php" method="post" enctype="multipart/form-data">
+  <form action="https://ihome.ust.hk/~rossiter/cgi-bin/show_everything.php" method="get" enctype="multipart/form-data">
     <fieldset>
       <legend>Your face</legend>
       <label for="file">Your image:</label>
-      <input type="file" id="file" name="file" value="" required="">
+      <input type="file" id="file" name="file" value="">
       <br>
       <label for="preview">Image preview:</label>
-      <img src="" id="preview" width="150">
+      <img src="" alt="" id="preview" width="150">
     </fieldset>
     <fieldset>
       <legend>Your General Details</legend>
       <label for="name">Name:</label>
-      <input type="text" name="name" id="name" placeholder="Your full name" required="">
+      <input type="text" name="name" id="name" placeholder="Your full name">
       <br>
       <label for="">Gender:</label>
-      <input type="radio" name="gender" id="male" value="male" required="">
       <label for="male">Male</label>
-      <input type="radio" name="gender" id="female" value="female" required="">
+      <input type="radio" name="gender" id="female" value="female">
       <label for="female">Female</label>
       <br>
       <label for="age">Age:</label>
-      <input type="number" name="age" id="age" value="18" required="">
+      <input type="number" name="age" id="age" value="18">
       <br>
       <label for="birthday">Date of birth:</label>
       <input type="date" name="birthday" id="birthday">
@@ -71,7 +73,7 @@
       <label for="color">Favorite color:</label>
       <input type="color" name="color" value="">
       <br>
-      <label for="country">Wich country?</label>
+      <label for="country">Wich country:</label>
       <select class="" name="country" id="country">
         <option value="no selection"></option>
         <option value="Spain">Spain</option>
@@ -92,7 +94,6 @@
     <fieldset>
       <legend>Your Contact Information</legend>
       <label for="email">Email:</label>
-      <input type="email" name="email" value="" id="email" required="">
       <br>
       <label for="mobile">Mobile:</label>
       <input type="tel" name="mobile" value="" id="mobile">
@@ -101,8 +102,8 @@
       <textarea name="address" rows="3" cols="20" id="address"></textarea>
       <br>
       <label for="">Method to contact you:</label>
-      <input type="checkbox" name="contact" value="email" id="email2">
-      <label for="email2">Email</label>
+      <button name="contact" value="email" id="email">
+      <label for="email">Email</label>
       <input type="checkbox" name="contact" value="whatsapp" id="whatsapp">
       <label for="whatsapp">Whatsapp</label>
       <input type="checkbox" name="contact" value="chat" id="chat">
@@ -110,5 +111,6 @@
     </fieldset>
     <input type="submit" name="submit" value="submit">
   </form>
+  <script src="https://www.cse.ust.hk/~rossiter/dating_web_site.js"></script>
 </body>
 </html>

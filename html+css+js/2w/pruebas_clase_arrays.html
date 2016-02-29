@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+    var pets = ["Dog", "Cat", "Hamster"];
+    var loveMost = [3, 1, 2];
+    var petsOrdered = [];
+    var index = 0;
+    while (index < pets.length) {
+
+      position = loveMost.indexOf(index+1);
+      petsOrdered.push(pets[position]);
+
+      index ++;
+    }
+    alert("previous order:\n\n" + pets + "\n\n"
+           + "Ordered:\n\n" + petsOrdered);
+    // Random integer between 0 and 50
+    alert(Math.floor(Math.random()*51));
+  </script>
+</head>
+<body>
+
+</body>
+</html>

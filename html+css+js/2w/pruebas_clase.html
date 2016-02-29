@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+  // En js hay que escribir siempre los guiones como guiones bajos
+    function check_user_age (e) {
+      if (user_age() < 18)
+      {alert("You should go to another place.")
+      e.preventdefault();
+      }else{
+      document.write("Welcome!");
+    }
+    }
+    function user_age () {
+      var age;
+      age = prompt("Enter your age");
+      return age;
+    }
+
+  </script>
+</head>
+<body onload="check_user_age();">
+
+</body>
+</html>

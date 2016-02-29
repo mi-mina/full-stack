@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+    var money, chocolates, cost;
+    cost = 12;
+    money = prompt("How much money do you have?");
+    // It woks fina just like that, but in the example is:
+    // money = parseInt(prompt("How much money do you have?"));
+    // What is the difference?
+    chocolates = 0;
+    while (money >= cost) {
+      money -= cost;
+      chocolates++;
+    }
+    alert("The cost of one chocolate is " + cost + " dolars." +
+           " You have bought " + chocolates + " chocolates!" +
+           " You have " + money + " dollars left.");
+  </script>
+</head>
+<body>
+
+</body>
+</html>
