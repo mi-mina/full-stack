@@ -5,12 +5,15 @@
   <title>Guessing game</title>
   <script type="text/javascript">
     var target, guess_input, guesses;
+    target = Math.floor((Math.random()*100)+1);
+    console.log(target);
     guesses = 0;
 
     function ask_number () {
-      target = Math.floor((Math.random()*100)+1);
+
       guess_input = parseInt(prompt("I am thinking of a number\n\n" +
       "Please enter a number in the range 1 to 100"));
+
       if (isNaN(guess_input)){
         alert("Enter a number!");
         ask_number();

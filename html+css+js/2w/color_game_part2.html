@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the color. Part 2.</title>
+  <script type="text/javascript">
+  /*I have tried to solve the task in a different way as shown in the example,
+  using a recursive function instead of a while loop.
+  I also have tried to improve it by forcing the game to accept capitalize or
+  lowercase colors indistinctly.*/
+
+  var targetColor, userGuess, colorArray, colorArrayLowerCase, colorArrayText,
+  randomIndex, guesses;
+
+  function to_lower_case (string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+  }
+
+  colorArray = ["Aqua", "Black", "Blue", "Crimson", "Cyan", "Green", "Indigo",
+  "Lime", "Magenta", "Olive", "Orange", "Red", "White"];
+  colorArrayLowerCase = colorArray.map(to_lower_case);
+
+  colorArrayText = colorArray.join(", ");
+  randomIndex = Math.floor((Math.random()*colorArray.length));
+  targetColor = colorArrayLowerCase[randomIndex];
+  console.log(targetColor);
+  guesses = 0;
+
+  function do_game () {
+
+    userGuess = prompt("I am thinking of one of these colors:\n\n" +
+    colorArrayText + "\n\n What color am I thinking of?");
+
+    userGuess = to_lower_case(userGuess);
+
+    if(userGuess == null){
+      //To escape the game
+      alert("Bye bye!")
+    }else if(colorArrayLowerCase.indexOf(userGuess) == -1){
+      guesses++;
+      alert("Sorry, I don't recognize your color.\n\n Please try again.");
+      do_game();
+    }else if(userGuess > targetColor){
+      guesses++;
+      alert("Sorry, your guess is not correct!\n\n"
+      + "Hint: Your color is alphabetically higher than mine.\n\n"
+      + "Please try again.");
+      do_game();
+    }else if(userGuess < targetColor){
+      guesses++;
+      alert("Sorry, your guess is not correct!\n\n"
+      + "Hint: Your color is alphabetically lower than mine.\n\n"
+      + "Please try again.");
+      do_game();
+    }else{
+      guesses++;
+      myBody=document.getElementsByTagName("body")[0];
+      myBody.style.background=targetColor;
+      alert("Congratulations! You have guessed the color!\n\n It took you "
+      + guesses + " guesses to finish the game!\n\n"
+      + "You can see the colour in the background.");
+    }
+  }
+
+  </script>
+</head>
+<body onload="do_game();">
+
+</body>
+</html>

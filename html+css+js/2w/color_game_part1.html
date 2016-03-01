@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the color. Part 1.</title>
+  <script type="text/javascript">
+  var targetColor, userGuess, colorArray;
+  colorArray = ["black", "blue", "green", "magenta", "red", "white"];
+  var randomIndex = Math.floor((Math.random()*colorArray.length));
+  targetColor = colorArray[randomIndex]
+
+  function do_game () {
+
+    console.log(targetColor);
+    userGuess = prompt("I am thinking of one of these colors;\n\n" +
+    colorArray + "\n\n What color am I thinking of?")
+
+    if(targetColor == userGuess){
+      myBody=document.getElementsByTagName("body")[0];
+      myBody.style.background=targetColor;
+      alert("You got it!")
+    }else{
+      alert("Try again!")
+      do_game();
+    }
+  }
+
+
+
+  </script>
+</head>
+<body onload="do_game();">
+
+</body>
+</html>

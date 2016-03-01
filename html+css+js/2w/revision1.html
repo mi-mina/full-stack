@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<body onload="do_game()">
+
+  <script>
+
+    function do_game() {
+      var success = false;
+      var time = 0;
+      var colors = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+      var target = colors[Math.floor(Math.random() * colors.length)];
+      alert("The answer is: " + target);
+
+      while (!success) {
+        var guess = prompt("I am thinking of one of these colors:\n\n" + colors.sort().join(", ") + "\n\nWhat color am I thinking of?");
+        time++;
+        success = check_guess(guess, target, colors, time);
+      }
+    }
+
+    function check_guess(guess, target, array, time) {
+      guess = guess.toLowerCase();
+      if (array.indexOf(guess) == -1) {
+        alert("Sorry, I don't recognize your color.\n\nPlease try again.");
+      } else if (guess > target) {
+        alert("Sorry, your guess is not correct!\n\nHint: your color is alphabetically higher than mine.\n\nPlease try again.");
+      } else if (guess < target) {
+        alert("Sorry, your guess is not correct!\n\nHint: your color is alphabetically lower than mine.\n\nPlease try again.");
+      } else {
+        document.getElementsByTagName("body")[0].style.background = target;
+        var times = time + " guesses";
+        if (time <= 1) {
+          times = time + " guess";
+        }
+        alert("Congratulations! You have guessed the color!\n\nIt took you " + times + " to finish the game!\n\nYou can see the color in the background.");
+        return true;
+      }
+      return false;
+    }
+
+  </script>
+
+</body>
+
+</html>
+
+<!-- Here: var color_guess = prompt("I am thinking of these colors: \n\n" + alpha_colors + "\n\nWhat color am I thinking of?");
+If your colors array had more elements, wouldn'y display well.
+You could have used  alpha_colors.join(", ")   instead of    alpha_colors.
+This would display a list with all the elements in the alpha_colors array, separated by a comma and a whitespace.
+
+You could try to improve your game by accepting Capitalized or lowercased colors indistinctly. -->
