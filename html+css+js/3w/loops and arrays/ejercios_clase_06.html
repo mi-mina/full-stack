@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+    var numbers = [1, 2, 3, 4, 5];
+    numbers.forEach(function (elem, idx, arr){
+      arr[idx] = elem * elem;
+    });
+    console.log(numbers);
+
+    //Importante ver cómo afecta forEach al array original, modificándolo también.
+
+  var numbers2 = [1, 2, 3, 4, 5];
+  var square = numbers2.map(function (elem) {
+    return elem*elem;
+  });
+  console.log(square);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

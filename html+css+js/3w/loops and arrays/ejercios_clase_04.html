@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+    var great_years = [];
+    for( var year = 2010; year <= 2016; year++){
+      if (!confirm("Was " + year + " a great year?")){
+        //Ojo con el signo de exclamación arriba. Lo que estamos confirmando
+        //es que NO fue un buen año y entonces en vez de continuar y añadir
+        //el año con el push, lo que hace continue es saltar a la cabeza del loop
+        //es decir, empieza la siguiente iteración.
+        continue;  
+      }
+      great_years.push(year);
+    }
+    alert("Your great years were: " + great_years);
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

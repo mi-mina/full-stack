@@ -1,0 +1,67 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Imgs en movimiento</title>
+    <script>
+      var pos_i = 200;
+      var n_img = 50;
+
+      function do_something() {
+        var theBody = document.getElementsByTagName("body")[0];
+        var theImg = document.createElement("img");
+        theImg.src = "200.jpg";
+        theImg.style.position="absolute";
+        theImg.style.left=pos_i;
+        theImg.style.top=pos_i;
+        // theBody.appendChild(theImg.cloneNode(true));
+
+        for (var i = 0; i < n_img; i++) {
+          theBody.appendChild(theImg.cloneNode(true));
+        }
+      }
+
+      function muevete () {
+        var images = document.getElementsByTagName("img");
+        var speeds = [];
+          for(var i = 0; i < n_img; i++){
+            speeds.push(Math.floor(Math.random()*5));
+          }
+        console.log(speeds);
+        var x_pos = [];
+          for(var i = 0; i < n_img; i++){
+            x_pos.push(pos_i);
+          }
+        var y_pos = [];
+          for(var i = 0; i < n_img; i++){
+            y_pos.push(pos_i);
+          }
+        var the_timer;
+
+        function set_timer(){
+
+          for(var i = 0; i < images.length; i++){
+            if(i % 2 == 0){
+              x_pos[i] = x_pos[i] + speeds[i];
+              y_pos[i] = y_pos[i] + speeds[i+1];
+            }else{
+              x_pos[i] = x_pos[i] - speeds[i];
+              y_pos[i] = y_pos[i] - speeds[i+1];
+            }
+
+            images[i].style.left=x_pos[i];
+            images[i].style.top=y_pos[i];
+          }
+
+          the_timer = setTimeout(set_timer, 25);
+        }
+        set_timer();
+      }
+    </script>
+  </head>
+  <body onload="do_something(); muevete();">
+
+  </body>
+
+</html>

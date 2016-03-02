@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript">
+    var pets = ["Cat", "Dog", "Hamster", "Octopus", "worm"];
+
+    var slice = pets.slice(2);
+    console.log(pets);
+    console.log(slice);
+
+    //splice: to remove elements splice(position, quantity)
+    var splice = pets.splice(2,1)
+    console.log(pets);
+    console.log(splice);
+
+    //splice: to add elements in a particular position with or without replacement
+    //without replacement: splice(position, 0, element or elements)
+    var splice2 = pets.splice(2, 0, "Fish", "Horse");
+    console.log(pets);
+    console.log(splice2);
+
+    //with replacement splice(start position, number of elements to be replaced,
+    // element or elements to insert)
+    var splice3 = pets.splice(0, 2, "Monkey");
+    console.log(pets);
+    console.log(splice3);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>
