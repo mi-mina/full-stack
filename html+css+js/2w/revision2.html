@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+</head>
+<body onload="playGame()" bg="white" id="pagebgcolour">
+
+<form>
+<input type="button" value="Play Again" onClick="playGame();">
+</form>
+
+<script>
+//set global variables
+var colours = ["coral","cyan","indigo","lime","linen","navy","plum","teal","turquoise"];
+var size = colours.length;
+var i;
+var guess;
+var rand;
+var colourname;
+var guesscount;
+var correct;
+var displaymsg = "test";
+
+function playGame() {
+
+	//generate random number
+	rand = Math.floor((Math.random() * 3) + 1);
+	colourname = colours[rand];
+	guesscount = 0;
+	correct = false;
+	str = "I am thinking of one of these colours ("+colourname+"):\n\n" + colourList(colours) + "\n\nWhat colour am I thinking of?";
+	guess = "";
+
+    while (!checkguess(guess)) {
+		guess = prompt(str);
+	}
+}
+
+function checkguess(guess) {
+
+	var validguess = false;
+	var a;
+
+	if (guess == "") {
+	   return false;
+	}
+
+	//Check whether the player's guess is a colour in the array
+	for ( a = 0 ; a < size ; a++ ) {
+		if (colours[a] == guess) {
+		   validguess = true;
+		}
+	}
+
+	if (validguess == false) { //valid guess not made
+	   str = "Sorry, I don't recognize your colour. Please choose another colour below:\n\n" + colourList();
+	   return false;
+
+	} else { //valid guess made
+	  	if (guess == colourname) { //guessed correctly
+		   document.body.style.backgroundColor = colourname;
+		   alert("Congratulations! You have guessed the colour!\n\n It took you " + guesscount + " guess(es) to finish the game!\n\nYou can see the selected colour in the background.");
+           return true;
+        } else if (guess < colourname ) {
+		   guesscount++;
+		   str = "Sorry, "+guess+" is not correct!\n\nHint: my colour (" + colourname + ") is alphabetically lower.\n\nPlease choose another colour below:\n\n" + colourList();
+		   return false;
+		} else if ( guess > colourname ) {
+		   guesscount++;
+		   str = "Sorry, "+guess+" is not correct!\n\nHint: my colour (" + colourname + ") is alphabetically higher.\n\nPlease choose another colour below:\n\n" + colourList();
+		   return false;
+		}
+	}
+}
+
+function colourList(array) {
+    var list = "";
+    for (i = 0; i < size; i++) {
+    	list = list + array[i] + "\n";
+    }
+	return list;
+}
+</script>
+</body>
+</html>
