@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matching Game</title>
+  <style>
+    .div{
+      position: absolute;
+      width: 500px;
+      height: 500px;
+    }
+    #rightSide {
+      left: 500px;
+      border-left: 1px solid black;
+    }
+    img {
+      position: absolute;
+    }
+
+
+  </style>
+</head>
+<body onload="generateFaces()">
+  <h1>Matching game</h1>
+  <p>Click on the extra smiling face on the left.</p>
+  <button onclick="reset(); generateFaces();">Start Over!</button>
+  <div id="container">
+    <div class="div" id="leftSide"></div>
+    <div class="div" id="rightSide"></div>
+  </div>
+
+
+
+  <script type="text/javascript">
+    var numberOfFaces = 5;
+    var countLevels = 0;
+
+    function generateFaces() {
+      var theContainer =  document.getElementById("container");
+      var theLeftSide = document.getElementById("leftSide");
+      var theRightSide = document.getElementById("rightSide");
+
+      while(theLeftSide.firstChild){
+        theLeftSide.removeChild(theLeftSide.firstChild);
+      }
+
+      while(theRightSide.firstChild){
+        theRightSide.removeChild(theRightSide.firstChild);
+      }
+
+      for(var i = 0; i < numberOfFaces; i++){
+        var top_position = Math.random()*400;
+        var left_position = Math.random()*400;
+        var img = document.createElement("img");
+        img.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+        img.style.top = top_position + "px";
+        img.style.left = left_position + "px";
+        theLeftSide.appendChild(img);
+
+        theRightSide.appendChild(img.cloneNode(true));
+      }
+
+      theRightSide.removeChild(theRightSide.lastChild);
+
+      theLeftSide.lastChild.onclick = function nextLevel(event){
+        event.stopPropagation();
+        //is necessary in order to ensure that
+        //the event does not also get applied to
+        // other elements in the web page
+        numberOfFaces += 5;
+        countLevels ++;
+        generateFaces();
+      }
+
+      theContainer.onclick = function gameOver() {
+        alert("Game Over!\n\n" + "Congratulations! You have reached level " + countLevels);
+        theContainer.onclick = null;
+        theLeftSide.lastChild.onclick = null;
+      };
+    }
+
+    function reset() {
+      numberOfFaces = 5;
+      countLevels = 0;
+    }
+
+  </script>
+</body>
+</html>
