@@ -91,11 +91,16 @@
 
 #### Bootstrap Resources
 
-* []()
-* []()
-* []()
-* []()
-Bootstrap Image Classes
-Bootstrap Thumbnail Classes
-Bootstrap Media Object Classes
-Bootstrap Responsive Embed Classes
+* [Bootstrap Image Classes](http://getbootstrap.com/css/#images)
+* [Bootstrap Thumbnail Classes](http://getbootstrap.com/components/#thumbnails)
+* [Bootstrap Media Object Classes](http://getbootstrap.com/components/#media)
+* [Bootstrap Responsive Embed Classes](http://getbootstrap.com/components/#responsive-embed)
+
+### Alerting Users: Labels, Badges, Alerts, Progress Bars
+
+#### Bootstrap Resources
+
+* [Bootstrap Labels](http://getbootstrap.com/components/#labels)
+* [Bootstrap Badges](http://getbootstrap.com/components/#badges)
+* [Bootstrap Alerts](http://getbootstrap.com/components/#alerts)
+* [Bootstrap Progress Bars](http://getbootstrap.com/components/#progress)
