@@ -97,7 +97,9 @@
 
         <div class="col-xs-12 col-sm-4 col-md-2">
           <p style="padding:40px;"></p>
-          <a href="#reserve" class="btn btn-warning btn-block" role="button">Reserve table</a>
+          <a href="#reserve" class="btn btn-warning btn-block" role="button"
+          data-toggle="tooltip" title="Or Call us at +852 12345678"
+          data-placement="bottom">Reserve table</a>
         </div>
       </div>
     </div>
@@ -297,6 +299,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
   </script>
   <script src="js/bootstrap.min.js"></script>
+  <script>
+        $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+         });
+  </script>
 </body>
 
 </html>
