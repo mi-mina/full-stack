@@ -29,10 +29,10 @@
         <div class="row row-content" ng-controller="menuController as menuCtrl">
             <div class="col-xs-12">
               <ul class="media-list">
-                <li class="media" ng-repeat="dish in menuCtrl.dishes">
+                <li class="media" >
                   <div class="media-left media-middle">
                     <a href="#"><img class="media-object img-thumbnail"
-                    ng-src={{dish.image}} alt="Uthappizza"></a>
+                    ng-src={{menuCtrl.dish.image}} alt="Uthappizza"></a>
                   </div>
                   <div class="media-body">
                     <h2 class="media-heading">
