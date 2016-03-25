@@ -25,41 +25,41 @@
 
 <body>
 
-    <div class="container">
-        <div class="row row-content" ng-controller="dishDetailController as dishCtrl">
-            <div class="col-xs-12">
-                <div class="media">
-  <div class="media-left media-middle">
-    <a href="#">
-      <img class="media-object img-thumbnail" 
-           ng-src={{dishCtrl.dish.image}} ng-alt={{dishCtrl.dish.name}}>
-    </a>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading">{{dishCtrl.dish.name}}</h4>
-    <p>{{dishCtrl.dish.description}}</p>
-  </div>
-</div>
-            </div>
-            <div class="col-xs-9 col-xs-offset-1">
-              <p style="padding = 5px;"></p>
-              <div class="form-group">
-              <label class="col-sm-3">Costumer comments</label>
-              <p>Sort by:
-              <input class="co-sm-4" type="text" ng-model="query">
-                </p>
-                </div>
-              <blockquote ng-repeat = "comment in dishCtrl.dish.comments | orderBy: query">
-                <p>{{comment.rating}} Stars</p>
-           <p>{{comment.comment}}</p>
-  <footer>{{comment.author}},<cite title="Source Title">{{comment.date | date : format : timezone}}</cite></footer>
-</blockquote>
-            </div>
-        </div>
+	<div class="container">
+		<div class="row row-content" ng-controller="dishDetailController as detailController">
+			<div class="col-xs-12">
+				<div class="media">
+					<div class="media-left media-middle">
+						<img class="media-object img-thumbnail" ng-src={{detailController.dish.image}} alt="{{detailController.dish.name}}">
+					</div>
+					<div class="media-body">
+						<h2 class="media-heading">
+							{{detailController.dish.name}} 
+							<span class="label label-danger">{{detailController.dish.label}}</span>
+							<span class="badge">{{detailController.dish.price | currency}}</span>
+						</h2>
+						<p>{{detailController.dish.description}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-9 col-xs-offset-1">
+				<h3>
+					Customer Comments
+					<label for="orderby" style="font-size: small; margin-left: 25px; font-weight: normal;">Sort by:</label>
+					<input name="orderby" style="font-size: small;" type="text" ng-model="detailController.sortby"/>
+				</h3>
+				
+				<blockquote ng-repeat="comment in detailController.dish.comments | orderBy : detailController.sortby">
+					<p>{{comment.rating}} Stars</p>
+					<p>{{comment.comment}}</p>
+					<footer>{{comment.author}}, {{comment.date | date}}</footer>
+				</blockquote>
+			</div>
+		</div>
 
-    </div>
+	</div>
 
-    <script src="../bower_components/angular/angular.min.js"></script>
+	<script src="../bower_components/angular/angular.min.js"></script>
     <script>
 
         var app = angular.module('confusionApp',[]);
@@ -110,6 +110,7 @@
             
             this.dish = dish;
             
+            this.sortby = '';
         });
 
     </script>
