@@ -1,5 +1,5 @@
 'use strict';
-angular.module("confusionApp", [])
+angular.module("confusionApp",[])
   .controller("MenuController", ['$scope', function($scope){
   // The controller usually starts with capital letters
   // Declaramos angular module directamente y no lleva semicolon al final porque
@@ -72,11 +72,37 @@ angular.module("confusionApp", [])
 }])
 
   .controller('ContactController', ['$scope', function($scope) {
-    // Whatever we define here will also be accessible in the FeedbackController 
+    // Whatever we define here will also be accessible in the FeedbackController
     $scope.feedback = {mychannel:"", firstName:"", lastName:"",
                       agree:false, email:"" };
+    var channels = [{value:"tel", label:"Tel."}, {value:"Email", label:"Email"}];
+    // channels is an array of js objects
+    $scope.channels = channels;
+    $scope.invalidChannelSelection = false; //boolean var
+
   }])
 
   .controller('FeedbackController', ['$scope', function($scope) {
-
+    $scope.sendFeedback = function() {
+      console.log($scope.feedback);
+      // console will print the feedback object
+      // the FeedbackController is a child of the ContactController, that's why
+      // it has access to the feedback object
+      //When the usr clicks the submit button we are going to force him to select
+      //one of the to options if it has checked the contact me checkbox
+      if ($scope.feedback.agree && ($scope.feedback.mychannel == "") &&
+      !$scope.feedback.mychannel)
+        {
+          $scope.invalidChannelSelection = true;
+          console.log('incorrect');
+        } else
+        {
+          $scope.invalidChannelSelection = false;
+          $scope.feedback = { mychannel:"", firstName:"", lastName:"",
+                              agree:false, email:"" };
+          $scope.feedback.mychannel="";
+          $scope.feedbackForm.$setPristine();
+          console.log($scope.feedback);
+        }
+    };
   }]);
