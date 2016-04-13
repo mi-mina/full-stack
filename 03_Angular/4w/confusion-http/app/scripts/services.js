@@ -5,6 +5,8 @@ angular.module('confusionApp')
         //Similar to an ENV Var
         .service('menuFactory', ['$http', 'baseURL', function($http, baseURL) {
             //The var dishes in now going to be retrieved from baseURL
+            //That is, from where we have the json-server serving us the db.json
+            // and the files in the public directory
 
             var promotions = [
                 {
@@ -15,18 +17,22 @@ angular.module('confusionApp')
                           price:'19.99',
                           description:'Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person ',
                 }
-
             ];
 
+            //The general usage of $http is like that:
+            //  $http({
+            //    method: 'GET',
+            //    url: '/someUrl'
+            //  }).then(function successCallback(response) { //some function
+            //   }, function errorCallback(response) { //some function
+            //   });
+            //But there are also shortcut methods like $http.get():
                 this.getDishes = function(){
-
                     //return dishes;
                     return $http.get(baseURL+"dishes");
-
                 };
 
                 this.getDish = function (index) {
-
                     //return dishes[index];
                     return $http.get(baseURL+"dishes/"+index);
                 };

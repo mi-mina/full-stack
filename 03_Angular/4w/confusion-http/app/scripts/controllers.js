@@ -17,6 +17,15 @@ angular.module('confusionApp')
             menuFactory.getDishes()
             .then(
               function(response){
+                console.log(response); //To see the object response in the console
+
+      // The response object has these properties: (from Angular API Reference)
+      // data – {string|Object} – The response body transformed with the transform functions.
+      // status – {number} – HTTP status code of the response.
+      // headers – {function([headerName])} – Header getter function.
+      // config – {Object} – The configuration object that was used to generate the request.
+      // statusText – {string} – HTTP status text of the response.
+
                 $scope.dishes = response.data;
                 $scope.showMenu = true;
               },
@@ -69,7 +78,7 @@ angular.module('confusionApp')
 
                 console.log($scope.feedback);
 
-                if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
+                if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
                     $scope.invalidChannelSelection = true;
                     console.log('incorrect');
                 }
@@ -117,7 +126,7 @@ angular.module('confusionApp')
                 $scope.commentForm.$setPristine();
 
                 $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-            }
+            };
         }])
 
         // implement the IndexController and About Controller here

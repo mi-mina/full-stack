@@ -29,18 +29,24 @@ gulp.task('clean', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() { //the clean task must be run before default
-    gulp.start('usemin', 'imagemin','copyfonts', 'copytemplates'); //This functions will be run synchronously
+    gulp.start('usemin', 'imagemin','copyfonts'); //This functions will be run synchronously
                                                   // They don't depend on each other
+    //gulp.start('usemin', 'imagemin','copyfonts', 'copytemplates');//
+
 });
 
 //usemin
 gulp.task('usemin',['jshint'], function () { //the jshint task must be run before usemin
-  return gulp.src('./app/index.html') //The file where the comments build and endbuild are
+   return gulp.src('./app/**/*.html') //Find all html files in the app directory, including index.html,
+                                      //the file where the comments build and endbuild are.
+    //return gulp.src('./app/index.html')
       .pipe(usemin({
         css:[minifycss(),rev()],
         js: [ngannotate(),uglify(),rev()] //ngannotate avoids problems
       }))
-      .pipe(gulp.dest('dist/'));
+      .pipe(gulp.dest('dist/'))
+      .pipe(gulp.dest('../json-server/public'));//I have added this in order not to copy
+      //the content in the dist directory to the public directory every time the code changes
 });
 
 // Images
@@ -49,22 +55,27 @@ gulp.task('imagemin', function() {
   gulp.src('app/images/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('../json-server/public/images'))
     .pipe(notify({ message: 'Images task complete' }));
 });
 
 //copyfonts
 gulp.task('copyfonts', ['clean'], function() {
    gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
+   .pipe(gulp.dest('./dist/fonts'))
+   .pipe(gulp.dest('../json-server/fonts'));
    gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
+   .pipe(gulp.dest('./dist/fonts'))
+   .pipe(gulp.dest('../json-server/fonts'));
 });
 
 //copytemplates
-gulp.task('copytemplates', ['clean'], function(){
-    gulp.src(['app/views/*.html'])
-    .pipe(gulp.dest('dist/views'));
-});
+//Esto lo incluí de un comentario del foro.
+//Ahora no hace falta porque ya he modificado el usemin task para que lo incluya
+// gulp.task('copytemplates', ['clean'], function(){
+//     gulp.src(['app/views/*.html'])
+//     .pipe(gulp.dest('dist/views'));
+// });
 
 // Watch
 gulp.task('watch', ['browser-sync'], function() {
