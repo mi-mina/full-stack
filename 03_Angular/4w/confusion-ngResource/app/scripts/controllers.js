@@ -10,29 +10,32 @@ angular.module('confusionApp')
 
             $scope.showMenu = false;
             $scope.message = "Loading ...";
-            $scope.dishes={};
-            // We initialize this as an empty object, until we get the response
-            //from the server.
-
-            menuFactory.getDishes()
-            .then(
+            // $scope.dishes={};
+            // // We initialize this as an empty object, until we get the response
+            // //from the server.
+            // menuFactory.getDishes()
+            // .then(
+            //   function(response){
+            //     console.log(response); //To see the object response in the console
+            //     $scope.dishes = response.data;
+            //     $scope.showMenu = true;
+            //   },
+            //   function(response) {
+            //     $scope.message = "Error: "+response.status + " " + response.statusText;
+            //   }
+            // );
+            $scope.dishes = menuFactory.getDishes().query(
               function(response){
-                console.log(response); //To see the object response in the console
-
-      // The response object has these properties: (from Angular API Reference)
-      // data – {string|Object} – The response body transformed with the transform functions.
-      // status – {number} – HTTP status code of the response.
-      // headers – {function([headerName])} – Header getter function.
-      // config – {Object} – The configuration object that was used to generate the request.
-      // statusText – {string} – HTTP status text of the response.
-
-                $scope.dishes = response.data;
+                $scope.dishes = response;
                 $scope.showMenu = true;
               },
-              function(response) {
-                $scope.message = "Error: "+response.status + " " + response.statusText;
-              }
-            );
+              //this is the successful function. Here, the response is the actual data
+              function(response){
+                $scope.message = "Error: " + response.status + " " +
+                response.statusText;
+              });
+            //.query takes care of create an empty array before we get the data
+            //of the response, so we no longer need to initialize $scope.dishes={};
 
 
             $scope.select = function(setTab) {
@@ -95,57 +98,78 @@ angular.module('confusionApp')
         .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
             $scope.showDish = false;
             $scope.message="Loading ...";
-            $scope.dish = {};
-            //Empty JS object
-            menuFactory.getDish(parseInt($stateParams.id,10))
-            .then(
+            // $scope.dish = {};
+            // //Empty JS object
+            // menuFactory.getDish(parseInt($stateParams.id,10))
+            // .then(
+            //   function(response){
+            //       $scope.dish = response.data;
+            //       $scope.showDish=true;
+            //   },
+            //   function(response) {
+            //     $scope.message = "Error: "+response.status + " " + response.statusText;
+            //   }
+            // );
+            $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)})
+            .$promise.then(
               function(response){
-                  $scope.dish = response.data;
-                  $scope.showDish=true;
+                $scope.dish = response;
+                $scope.showDish = true;
               },
-              function(response) {
+              function(response){
                 $scope.message = "Error: "+response.status + " " + response.statusText;
-              }
-            );
-
+              });
+              //This is another way to specify a success and error functions.
         }])
 
-        .controller('DishCommentController', ['$scope', function($scope) {
-
-            $scope.mycomment = {rating:5, comment:"", author:"", date:""};
+        .controller('DishCommentController', ['$scope', 'menuFactory',
+        function($scope,menuFactory) {
+          //We need to inject the menuFactory here in order to access the
+          // .getDishes method, to which we have previously added a custom
+          // method 'update'. This way we can update the new comments to the
+          //server.
+            $scope.submitForm = {author:"", rating:"5", comment:"", date:""};
 
             $scope.submitComment = function () {
 
-                $scope.mycomment.date = new Date().toISOString();
-                console.log($scope.mycomment);
+            $scope.submitForm.date = new Date().toISOString();
+            console.log($scope.submitForm);
 
-                $scope.dish.comments.push($scope.mycomment);
-                // DishCommentController is inside the DishDetailController,
-                // that's why we can access $scope.dish from here
-
-                $scope.commentForm.$setPristine();
-
-                $scope.mycomment = {rating:5, comment:"", author:"", date:""};
+            $scope.dish.comments.push($scope.submitForm);
+            // DishCommentController is inside the DishDetailController,
+            // that's why we can access $scope.dish from here
+            menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
+            $scope.commentForm.$setPristine();
+            $scope.submitForm = {author:"", rating:"5", comment:"", date:""};
             };
         }])
 
         // implement the IndexController and About Controller here
         .controller('IndexController', ['$scope', 'menuFactory',
         'corporateFactory', function($scope, menuFactory, corporateFactory){
-          $scope.showDish = false;
+          $scope.showDish = true;
           $scope.message="Loading ...";
 
-          $scope.dish = {};
-          menuFactory.getDish(0)
-          .then(
+          // $scope.dish = {};
+          // menuFactory.getDish(0)
+          // .then(
+          //   function(response){
+          //     $scope.dish = response.data;
+          //     $scope.showDish = true;
+          //   },
+          //   function(response) {
+          //     $scope.message = "Error: "+response.status + " " + response.statusText;
+          //   }
+          // );
+          $scope.dish = menuFactory.getDishes().get({id:0})
+          .$promise.then(
             function(response){
-              $scope.dish = response.data;
+              $scope.dish = response;
               $scope.showDish = true;
             },
             function(response) {
-              $scope.message = "Error: "+response.status + " " + response.statusText;
-            }
-          );
+                $scope.message = "Error: "+response.status + " " + response.statusText;
+            });
 
           var promotion= menuFactory.getPromotion(0);
           $scope.promotion = promotion;

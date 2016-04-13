@@ -63,10 +63,10 @@ gulp.task('imagemin', function() {
 gulp.task('copyfonts', ['clean'], function() {
    gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'))
-   .pipe(gulp.dest('../json-server/fonts'));
+   .pipe(gulp.dest('../json-server/public/fonts'));
    gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'))
-   .pipe(gulp.dest('../json-server/fonts'));
+   .pipe(gulp.dest('../json-server/public/fonts'));
 });
 
 //copytemplates

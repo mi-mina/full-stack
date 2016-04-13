@@ -41,7 +41,7 @@
                       <a ui-sref="app.dishdetails({id: dish.id})">
                         <!-- dish._id json-server doesn't work well with underscore -->
                         <img class="media-object img-thumbnail"
-                        ng-src={{dish.image}} alt="Uthappizza">
+                        ng-src={{dish.image}} alt="{{dish.name}}">
                       </a>
                     </div>
                     <div class="media-body">

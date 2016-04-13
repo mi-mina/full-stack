@@ -3,7 +3,7 @@
 angular.module('confusionApp')
         .constant("baseURL","http://localhost:3000/")
         //Similar to an ENV Var
-        .service('menuFactory', ['$http', 'baseURL', function($http, baseURL) {
+        .service('menuFactory', ['$resource', 'baseURL', function($resource, baseURL) {
             //The var dishes in now going to be retrieved from baseURL
             //That is, from where we have the json-server serving us the db.json
             // and the files in the public directory
@@ -19,23 +19,17 @@ angular.module('confusionApp')
                 }
             ];
 
-            //The general usage of $http is like that:
-            //  $http({
-            //    method: 'GET',
-            //    url: '/someUrl'
-            //  }).then(function successCallback(response) { //some function
-            //   }, function errorCallback(response) { //some function
-            //   });
-            //But there are also shortcut methods like $http.get():
                 this.getDishes = function(){
                     //return dishes;
-                    return $http.get(baseURL+"dishes");
+                    return $resource(baseURL+"dishes/:id",null,{'update':{
+                      method:'PUT'}});
                 };
 
-                this.getDish = function (index) {
-                    //return dishes[index];
-                    return $http.get(baseURL+"dishes/"+index);
-                };
+                //Now, we don't need getDish anymore
+                // this.getDish = function (index) {
+                //     //return dishes[index];
+                //     return $resource.get(baseURL+"dishes/"+index);
+                // };
 
                 // implement a function named getPromotion
                 // that returns a selected promotion.
