@@ -111,22 +111,20 @@ angular.module('confusionApp')
         }])
 
         .controller('DishCommentController', ['$scope', function($scope) {
+          $scope.submitForm = {author:"", rating:"5", comment:"", date:""};
 
-            $scope.mycomment = {rating:5, comment:"", author:"", date:""};
+          $scope.submitComment = function () {
 
-            $scope.submitComment = function () {
+          $scope.submitForm.date = new Date().toISOString();
+          console.log($scope.submitForm);
 
-                $scope.mycomment.date = new Date().toISOString();
-                console.log($scope.mycomment);
+          $scope.dish.comments.push($scope.submitForm);
+          // DishCommentController is inside the DishDetailController,
+          // that's why we can access $scope.dish from here
+          $scope.commentForm.$setPristine();
+          $scope.submitForm = {author:"", rating:"5", comment:"", date:""};
+          };
 
-                $scope.dish.comments.push($scope.mycomment);
-                // DishCommentController is inside the DishDetailController,
-                // that's why we can access $scope.dish from here
-
-                $scope.commentForm.$setPristine();
-
-                $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-            };
         }])
 
         // implement the IndexController and About Controller here

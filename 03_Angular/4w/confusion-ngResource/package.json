@@ -17,8 +17,13 @@
     "gulp-rev": "^7.0.0",
     "gulp-uglify": "^1.5.3",
     "gulp-usemin": "^0.3.21",
+    "jasmine-core": "^2.4.1",
     "jshint": "^2.9.1",
-    "jshint-stylish": "^2.1.0"
+    "jshint-stylish": "^2.1.0",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-jasmine": "^0.3.8",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs": "^2.1.7"
   },
   "engines": {
     "node": ">=0.10.0"
