@@ -115,11 +115,12 @@ angular.module('conFusion.controllers', [])
         $scope.showDetails = !$scope.showDetails;
     };
 
+
     $scope.addFavorite = function (index) {
         console.log("index is " + index);
         favoriteFactory.addToFavorites(index);
         $ionicListDelegate.closeOptionButtons();
-    }
+    };
 }])
 
 .controller('ContactController', ['$scope', function($scope) {
@@ -154,15 +155,16 @@ angular.module('conFusion.controllers', [])
     };
 }])
 
-.controller('DishDetailController', ['$scope', '$stateParams', 'baseURL', 'menuFactory',
-function($scope, $stateParams, baseURL, menuFactory) {
+.controller('DishDetailController', ['$scope', '$stateParams', '$ionicPopover',
+'$ionicModal', 'baseURL', 'menuFactory', 'favoriteFactory',
+function($scope, $stateParams, $ionicPopover, $ionicModal, baseURL, menuFactory, favoriteFactory) {
 
     $scope.baseURL = baseURL;
-    $scope.dish = {};
+    // $scope.dish = {};
     $scope.showDish = false;
     $scope.message="Loading ...";
 
-    $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)})
+     menuFactory.getDishes().get({id:parseInt($stateParams.id,10)})
     .$promise.then(
                     function(response){
                         $scope.dish = response;
@@ -173,6 +175,49 @@ function($scope, $stateParams, baseURL, menuFactory) {
                     }
     );
 
+    // .fromTemplateUrl() method
+      $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
+        scope: $scope
+      }).then(function(popover) {
+        $scope.popover = popover;
+      });
+
+
+      $scope.openPopover = function($event) {
+        $scope.popover.show($event);
+      };
+
+      $scope.closePopover = function() {
+        $scope.popover.hide();
+      };
+
+      $scope.addFavorite = function () {
+          console.log("index is " + $scope.dish.id);
+          favoriteFactory.addToFavorites($scope.dish.id);
+          $scope.closePopover();
+      };
+
+      $scope.comments = {};
+
+      $ionicModal.fromTemplateUrl('templates/dish-comment.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.modal = modal;
+      });
+
+      $scope.addComment = function() {
+        $scope.modal.show();
+      };
+
+      $scope.closeComment = function() {
+        $scope.modal.hide();
+      };
+
+      $scope.submitComment = function() {
+        console.log('Submiting comment', $scope.comments);
+        $scope.closeComment();
+        $scope.closePopover();
+      };
 
 }])
 
@@ -257,8 +302,6 @@ function ($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate,
           });
     });
 
-
-    console.log($scope.dishes, $scope.favorites);
 
     $scope.toggleDelete = function () {
         $scope.shouldShowDelete = !$scope.shouldShowDelete;
