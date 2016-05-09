@@ -3,7 +3,7 @@
 angular.module('conFusion.services',['ngResource'])
 // Tenemos que injectar ngResource. No sé por qué antes no lo teníamos que injectar.
 // ¿Es porque esto no es una Angular app sino una Ionic app?
-        .constant("baseURL","http://192.168.1.33:3000/")
+        .constant("baseURL","http://192.168.1.133:3000/")
         .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
             return $resource(baseURL + "dishes/:id", null, {
                 'update': {
