@@ -28,7 +28,7 @@ function auth (req, res, next) {
     err.status = 401;
     next(err);
   }
-}
+};
 
 app.use(auth);
 
