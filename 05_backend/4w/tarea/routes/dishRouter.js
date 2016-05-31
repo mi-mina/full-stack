@@ -11,7 +11,7 @@ var dishRouter = express.Router()
 dishRouter.route('/')
   .get(Verify.verifyOrdinaryUser, function (req, res, next) {
     Dishes.find({})
-    .populate('comments.postedBy')
+    .populate('postedBy')
     .exec(function (err, dish) {
       if (err) throw err;
       res.json(dish);
