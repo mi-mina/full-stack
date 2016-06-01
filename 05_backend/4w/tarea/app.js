@@ -25,6 +25,9 @@ var leaderRouter =require('./routes/leaderRouter');
 var promoRouter =require('./routes/promoRouter');
 var favoriteRouter =require('./routes/favoriteRouter');
 
+// We call the espress function to start a new Espress application.
+// express() returns a request handler, that is a function.
+// Later we'll pass this function to http.createServer(app)
 var app = express();
 // First middleware that will intercept .all the trafic
 // If the incomming request is directed to the secure port, there will be a
@@ -51,6 +54,8 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 app.use(express.static(path.join(__dirname, 'public')));
+// In Node.js, __dirname is always the directory in which the currently executing
+// script resides
 
 app.use('/', routes);
 app.use('/users', users);
