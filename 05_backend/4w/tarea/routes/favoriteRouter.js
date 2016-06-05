@@ -10,7 +10,8 @@ var favoriteRouter = express.Router()
 
 favoriteRouter.route('/')
   .get(Verify.verifyOrdinaryUser, function (req, res, next) {
-    Favorites.find({})
+    req.body.postedBy = req.decoded._doc._id;
+    Favorites.find({postedBy: req.body.postedBy})
       .populate('postedBy dishes')
       .exec(function (err, favorite) {
         if (err) throw err;
@@ -20,6 +21,7 @@ favoriteRouter.route('/')
   .post(Verify.verifyOrdinaryUser, function (req, res, next) {
     req.body.postedBy = req.decoded._doc._id;
     req.body.dishes = req.body._id;
+    req.body._id = new mongoose.Types.ObjectId;
 
     Favorites.find({postedBy: req.body.postedBy})
       .exec(function (err, myFavorites) {
